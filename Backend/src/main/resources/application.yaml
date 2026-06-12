@@ -1,0 +1,76 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: wasd
+
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 30000
+
+  sql:
+    init:
+      mode: never
+
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+mybatis-plus:
+  type-aliases-package: com.example.demo.entity
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: deleted
+      logic-not-delete-value: 0
+      logic-delete-value: 1
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+server:
+  port: 9001
+  servlet:
+    context-path: /api
+
+logging:
+  level:
+    com.example.demo: debug
+    com.example.demo.mapper: debug
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss} - %msg%n'
+
+jwt:
+  secret: aGFyZHdvcmRzLWNvZGUtc2VjcmV0LWtleS1jaGFuZ2UtaW4tcHJvZC0yMDI2MDYxMA==
+  expiration: 86400000  # 24小时，单位毫秒
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+  packages-to-scan: com.example.demo.controller
+
+alipay:
+  # 沙箱网关地址（固定）
+  gateway-url: https://openapi-sandbox.dl.alipaydev.com/gateway.do
+  # 你的沙箱APPID
+  app-id: 9021000164665552
+  # 你的应用私钥
+  app-private-key: MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCBOEzyjzoilBZy2GhbrOS1Wze/suAReVZ3WJQl3u6feDKIhKVLOjiva93ucewbmNyLwyzD/kaMO5xspUUBNyo+S52Lj9ergPM3G85BRqbuOTabYFUsG1d5IpaRgnmeExETRLbHZHGNEfZL+iIPLeLKOhH97FoAsZjI3v0zXvSfmwUq3Dz0enMqLMG5uuu3sRTgfx7gkWK4dX0mEFptOfDeeV2gkuu8J+4AUPAGmKk3tL9gL9CQcGIDR9iRf4LSDTAWLEfdoDfEi58H6FtkJkEgcakKb4p3DeqBM0WG3sen0+Di68NQPD02R5g1ega/7EKFye19POzNAlI7kQ9G1+htAgMBAAECggEAJrJfiLwPos9KMbZQ+jM6gn0Aou3EYDdAB5mFNBogx6zNJUjj3zVeSFo7Ke7/z/vlAA3A2CjLo68uVvLfSU/l3KX0VhkLcxa4vyYajD3GO8zyZ3Ff0EeX2HTdNlImbYo0MNsBCZEw2Bgq8/HCRV1ubzUYsjwXb+G/aVgt5zZmd20eHRfwRvc7clrr8YWCBMYf/P+Trfje3sq1+WoYECnpOrGkEadVBLh0vRs7vw+Pd+lQLi6RTol3Ap6ghXgPJajKHfb+zV60LX7wuUVtrSW+Lr8aJB7Sx+E3IZJnwnE/IibVtHNN2jWHvNmVu2ITW70EkernDhSKyj8USUl8Oz77WQKBgQC3HZ79i0BX/n0LLA5hTLZiU3VDU3jMk36duEq4bMSVtDN7aydE8YDguamg90rAj7HJMmRsI+D0xCqbalywm0Lm/rSnpXkTAvamdL+UXjS52TkPN1eF5SrsONOk8DBoGYMxbwTRErr04unUzoJVxXA0jpVeYCuaWtx1JVh0RRdAywKBgQC0pwbCJsmi1TNL2S3qkvGpP77zWWH8mINLK4ILyN2VwCLjzyn6yzUOFyXgPBsv6LmuABrczhe3LaqKtfWaVmjTAhzojmEx5t95mkDRbLy1k+cQliqHSXDYhfkVr5T4IB7cBSVlh14klJGQ74o3kWyHPF79w+5GVLJJm4HDGCVspwKBgQCq2vOHBNADiotnyjKcrLQcKFzoddDnqNNiHBtz2uDOAfZrOL7KQEAM7o8MhtBzvV+YJ/G1SQDTwNk0a9iSXDvfRlaPegDvMTuscpBywjeWFM19mhiK8RnMkPVBF29DIlLb5AdtgHl6luKw0gKgPvmDwGo0Ra1Jd2/tyeuviOu6YwKBgQCNY5CRkkQMMqtUOOWMC3gijCbKVXGwfjl8MtA0owByfQ+Rlwl3JWYf4hQd3U02AQKaYbCkkpTTJGWu7N0N74VZaPTxOsZthRHxHb6PaniD8P9O5wjgG6W7gZfC1kpUrOcaMtjjDsCrBrCrbB+UgDgd3C1Ilfm+h/mGTLSR2isoTwKBgFGTr8lYPRZCi87ch6wo5Hmo4zKPAufmgztWXHQV1z6xaImp+W8XJFzDAC3MBuC9cZxItO+MHsf/jSM5JNTA9H9bM2mbFti3qLIlRdJ5/6XOmMIs0quBG+io85nTbNqDyNpnajJS+4PSBO+P9Q4jhPExnodL8O3xIsbmv4q5sitm
+  # 支付宝公钥
+  alipay-public-key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkOUblkAS5ORgleBJatOWVoDZg0Pv3jVOHA5VCGkB3QdufZ2FUJUE8266KlHeEZDXqFVCTDMf2qDH6Y5HxMCCyNCS7tBKbDJa2tBN17vS/+qc+T9XXG5ipkt6Prdk0UmrWwvknEYaUqEyY8fCNDxQ0NmR98XK9FRBO/U6xGGRaMFb2ClN67k03vBD08petT8AKzzdg2W3DK/h1/jfMV+Yv/YphtQTRFuxMGWchfJGwK78jfXta0i9jbGeclYpE0TghT+AesYIQqv90gaaKKWHg19BS63n5G6XI6OdonJtmLgZwePyICfUfcs94iu5c0lK1ZDFOxG2xSEixSXUrNxY4wIDAQAB
+  # 异步通知回调地址（需公网可访问）
+  notify-url: http://frp-oil.com:15634/api/alipay/notify
+  # 同步跳转地址（可选）
+  return-url: http://localhost:5173/payment/result
+  # 固定参数：返回格式、编码、签名类型
+  format: JSON
+  charset: UTF-8
+  sign-type: RSA2
